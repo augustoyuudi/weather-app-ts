@@ -1,5 +1,6 @@
 import { Response } from 'express';
 import mongoose from 'mongoose';
+import { CUSTOM_VALIDATION } from '@src/models/user';
 
 export abstract class BaseController {
   protected sendCreatedUpdateErrorResponse(
@@ -7,6 +8,17 @@ export abstract class BaseController {
     error: mongoose.Error.ValidationError | Error
   ): void {
     if (error instanceof mongoose.Error.ValidationError) {
+      const duplicatedKindErrors = Object.values(error.errors).filter((err) => {
+        if (err instanceof mongoose.Error.ValidatorError || err instanceof mongoose.Error.CastError) {
+          return err.kind === CUSTOM_VALIDATION.DUPLICATED;
+        }
+
+        return false;
+      });
+      if (duplicatedKindErrors.length) {
+        res.status(409).send({code: 409, error: error.message});
+        return;
+      }
       res.status(422).send({ code: 422, error: error.message });
 
       return;
