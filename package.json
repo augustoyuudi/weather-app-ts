@@ -14,7 +14,7 @@
     "lint:fix": "eslint ./src ./test --ext .ts --fix"
   },
   "engines": {
-    "node": ">=16"
+    "node": "16"
   },
   "devDependencies": {
     "@types/config": "^0.0.40",
