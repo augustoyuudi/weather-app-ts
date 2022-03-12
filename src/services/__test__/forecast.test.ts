@@ -112,7 +112,3 @@ describe('Forecast service', () => {
     await expect(forecast.processForecastForBeaches(beaches)).rejects.toThrow(ForecastProcessingInternalError);
   });
 });
-
-function ForecastProcessingInernalError(ForecastProcessingInernalError: any) {
-  throw new Error('Function not implemented.');
-}

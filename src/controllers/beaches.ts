@@ -14,7 +14,7 @@ export class BeachesController {
       const result = await beach.save();
       res.status(201).send(result);
 
-    } catch(error: any) {
+    } catch(error) {
       if (error instanceof mongoose.Error.ValidationError) {
         res.status(422).send({ error: error.message});
 
