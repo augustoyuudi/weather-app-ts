@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/src/index.js",
-    "start:dev": "ts-node-dev --transpile-only 'src/index.ts'",
+    "start:local": "ts-node-dev --transpile-only 'src/index.ts' | pino-pretty -c ",
     "test": "yarn lint && yarn test:unit && yarn test:functional",
     "test:functional": "jest --projects ./test --runInBand",
     "test:unit": "jest",
